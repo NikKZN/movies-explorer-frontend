@@ -1,6 +1,6 @@
 .header__container {
   min-height: 74px;
-  background-color: aqua;
+  background: #465DFF;
   display: flex;
   justify-content: space-between
 }

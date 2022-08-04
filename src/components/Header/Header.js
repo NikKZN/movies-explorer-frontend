@@ -16,7 +16,7 @@ function Header(props) {
         alt="Логотип фильмотека."
       />
       <div className='header__account'>
-      {true ? (
+      {false ? (
             <>
               <Link
                 to="/movies"
