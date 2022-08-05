@@ -1,7 +1,7 @@
 .about-project {
   min-height: 608px;
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
   align-items: center;
   padding: 0 70px;
 }
@@ -48,7 +48,8 @@
   margin-top: 110px;
 }
 
-.about-project__back-end, .about-project__front-end {
+.about-project__back-end,
+.about-project__front-end {
   text-align: center;
   padding: 10px 0;
   margin: 0;
@@ -59,20 +60,21 @@
 
 .about-project__back-end {
   width: 20%;
-  background: #2BE080;
+  background: #2be080;
 }
 
 .about-project__front-end {
   width: 80%;
-  background: #F2F2F2;
+  background: #f2f2f2;
 }
 
-.about-project__back-end-text, .about-project__front-end-text {
+.about-project__back-end-text,
+.about-project__front-end-text {
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-  color: #A0A0A0;
+  color: #a0a0a0;
   padding-top: 13px;
 }
 
@@ -102,7 +104,7 @@
   .about-project__text {
     font-size: 12px;
     line-height: 18px;
-   margin-top: 22px;
+    margin-top: 22px;
   }
 
   .about-project__period {
@@ -112,16 +114,15 @@
   .about-project__back-end {
     width: 21%;
   }
-  
+
   .about-project__front-end {
     width: 79%;
   }
-  
 
   .about-project__back-end-text {
     width: 21%;
   }
-  
+
   .about-project__front-end-text {
     width: 79%;
   }
@@ -166,21 +167,23 @@
     margin-top: 60px;
   }
 
-  .about-project__back-end, .about-project__front-end {
+  .about-project__back-end,
+  .about-project__front-end {
     padding: 11px 0;
     font-size: 11px;
     line-height: 13px;
-  }  
+  }
 
   .about-project__back-end {
     width: 35%;
   }
-  
+
   .about-project__front-end {
     width: 65%;
   }
-  
-  .about-project__back-end-text, .about-project__front-end-text {
+
+  .about-project__back-end-text,
+  .about-project__front-end-text {
     font-weight: 400;
     font-size: 11px;
     line-height: 13px;
@@ -190,10 +193,8 @@
   .about-project__back-end-text {
     width: 35%;
   }
-  
+
   .about-project__front-end-text {
     width: 65%;
   }
-
-
 }
