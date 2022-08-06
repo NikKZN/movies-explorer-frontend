@@ -1,5 +1,5 @@
 .about-me {
-  min-height: 994px;
+  min-height: 1079px;
   background: #fff;
   display: flex;
   flex-direction: column;
@@ -78,6 +78,7 @@
 
 @media screen and (max-width: 820px) {
   .about-me {
+    min-height: 994px;
     padding: 0 50px;
   }
 
