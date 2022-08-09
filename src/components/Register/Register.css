@@ -1,4 +1,150 @@
-.p6 {
-  color: rgb(247, 7, 7);
-  font-size: 20px;
+.register {
+  min-height: 700px;
+  display: flex;
+}
+
+.register__content {
+  width: 396px;
+  margin: 0 auto;
+}
+
+.register__logo {
+  width: 38px;
+  height: 38px;
+  margin-top: 70px;
+}
+
+.register__greeting {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  margin: 37px 0 0;
+}
+
+.register__form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.register__label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #a0a0a0;
+}
+
+.register__input {
+  padding: 0 0 0 15px;
+  height: 46px;
+  border: none;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.register__input-error {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+  margin-top: 8px;
+}
+
+.register__submit-button {
+  background: #ff6838;
+  border-radius: 3px;
+  border: none;
+  height: 45px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #ffffff;
+  padding: 0;
+  margin-top: 71px;
+  cursor: pointer;
+}
+
+.register__caption {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #a0a0a0;
+  margin: 16px 0 0;
+}
+
+.register__caption-link {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #ff6838;
+  margin-left: 6px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 820px) {
+  .register {
+    min-height: 1024px;
+  }
+
+  .register__content {
+    margin: auto;
+  }
+
+  .register__logo {
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .register {
+    min-height: 780px;
+  }
+
+  .register__content {
+    margin: 56px auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .register__logo {
+    margin: 0 auto;
+  }
+
+  .register__greeting {
+    margin-top: 50px;
+  }
+
+  .register__form {
+    width: 260px;
+    margin-top: 81px;
+  }
+
+  .register__submit-button {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 158px;
+  }
+
+  .register__caption {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 14px;
+  }
+
+  .register__caption-link {
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+  }
 }
