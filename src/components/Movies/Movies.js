@@ -1,8 +1,16 @@
 import './Movies.css';
+import Header from '../Header/Header';
+import SearchForm from '../SearchForm/SearchForm';
+import Footer from '../Footer/Footer';
 
 function Movies() {
   return (
-      <p className='p2'>Тут карточки с фильмами</p>
+    <>
+      <Header />
+      <SearchForm />
+      <p>Тут фильмы</p>
+      <Footer />
+    </>
   );
 };
 

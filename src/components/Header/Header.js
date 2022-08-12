@@ -6,8 +6,6 @@ import profileIcon from "../../images/Header/profile-icon.svg";
 import Menu from '../Menu/Menu';
 
 function Header(props) {
-  // const location = useLocation();
-  // props.loggedIn = true;
   return (
     <div className="header__container">
       <img
@@ -16,7 +14,7 @@ function Header(props) {
         alt="Логотип фильмотека."
       />
       <div className='header__account'>
-      {false ? (
+      {true ? (
             <>
               <Link
                 to="/movies"
