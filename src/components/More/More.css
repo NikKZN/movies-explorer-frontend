@@ -1,0 +1,18 @@
+.more {
+  min-height: 146px;
+  margin: 50px 0 0;
+}
+
+.more__button {
+  border: none;
+  background: #f9f9f9;
+  border-radius: 6px;
+  height: 36px;
+  width: 100%;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 30px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+}
