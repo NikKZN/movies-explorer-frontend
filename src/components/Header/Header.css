@@ -83,6 +83,14 @@
   margin-right: 70px;
 }
 
+.header__logo, .header__link-films, .header__link-films-saved, .header__profile, .header__burger, .header__register, .header__login {
+  transition: opacity 0.3s ease;
+}
+
+.header__logo:hover, .header__link-films:hover, .header__link-films-saved:hover, .header__profile:hover, .header__burger:hover, .header__register:hover, .header__login:hover {
+  opacity: .7;
+}
+
 @media screen and (max-width: 770px) {
   .header__logo {
     margin: 18px 0 0 30px;

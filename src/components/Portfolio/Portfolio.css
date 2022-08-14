@@ -13,7 +13,7 @@
 
 .portfolio__links {
   list-style-type: none;
-  padding: 0;
+  padding: 0;  
 }
 
 .portfolio__item {
@@ -30,6 +30,11 @@
   text-decoration: none;
   margin: 20px 0 20px;
   color: #000000;
+  transition: opacity 0.3s ease;
+}
+
+.portfolio__link:hover {
+  opacity: .6;
 }
 
 .portfolio__link-img {
