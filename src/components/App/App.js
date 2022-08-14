@@ -6,6 +6,7 @@ import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
+import InfoTooltipPopup from '../InfoTooltipPopup/InfoTooltipPopup';
 import { Route, Switch } from 'react-router-dom';
 import Main from '../Main/Main';
 
@@ -36,6 +37,7 @@ function App() {
             <NotFound />
           </Route>
       </Switch>
+      <InfoTooltipPopup />
     </div>
   );
 }
