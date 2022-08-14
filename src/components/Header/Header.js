@@ -8,11 +8,13 @@ import Menu from '../Menu/Menu';
 function Header(props) {
   return (
     <div className="header__container">
-      <img
-        className="header__logo"
-        src={logo}
-        alt="Логотип фильмотека."
-      />
+      <Link to="/">
+        <img
+            className="header__logo"
+            src={logo}
+            alt="Логотип фильмотека."
+          />
+      </Link>
       <div className='header__account'>
       {true ? (
             <>

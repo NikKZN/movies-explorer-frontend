@@ -8,23 +8,23 @@ function InfoToolTip(props) {
       className={`popup popup_type_status-reg  ${
         false ? "popup_opened" : ""
       }`}
-      onClick={props.onCloseOverlay}
+      // onClick={props.onCloseOverlay}
     >
       <div className={`popup__container-status`}>
         <button
-          onClick={props.onClose}
+          // onClick={props.onClose}
           className="popup__button-close"
           type="button"
           aria-label="Закрыть окно."
         ></button>
         <img
-          src={props.isRegistered ? Ok : No}
+          src={true ? Ok : No}
           className="popup__status-image"
           alt="Статус."
         />
         <h2 className="popup__title">
-          {props.isRegistered
-            ? "Вы успешно зарегистрировались!"
+          {true
+            ? "Тут будет сообщение!"
             : `${props.errorMessage}`}
         </h2>
       </div>
