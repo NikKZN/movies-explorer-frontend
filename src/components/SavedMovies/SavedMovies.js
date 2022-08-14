@@ -2,13 +2,14 @@ import './SavedMovies.css';
 import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function SavedMovies() {
   return (
     <>
       <Header />
       <SearchForm />
-      <p className='p3'>Тут будут сохранённые фильмы!</p>
+      <MoviesCardList />
       <Footer />
     </>
   );
