@@ -16,7 +16,7 @@ function Header(props) {
           />
       </Link>
       <div className='header__account'>
-      {true ? (
+      {false ? (
             <>
               <Link
                 to="/movies"

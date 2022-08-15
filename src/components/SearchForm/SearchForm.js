@@ -1,6 +1,7 @@
 import "./SearchForm.css";
 import icon from "../../images/SearchForm/icon.svg";
 import find from "../../images/SearchForm/find.svg";
+import CheckBox from "../CheckBox/CheckBox";
 
 function SearchForm() {
   return (
@@ -23,14 +24,7 @@ function SearchForm() {
               </button>
             </div>
             <div className="search__checkbox">
-              <input
-                type="checkbox"
-                className="search__checkbox-selector"
-                id="short-films"
-                name="short-films"
-                value="yes"
-              />
-              <label for="short-films">Короткометражки</label>
+              <CheckBox />              
             </div>
           </form>
         </div>
