@@ -1,8 +1,8 @@
 .header__container {
   min-height: 74px;
-  background: #465DFF;
+  background: #465dff;
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .header__logo {
@@ -31,7 +31,6 @@
   align-items: center;
 }
 
-
 .header__profile {
   font-size: 14px;
   line-height: 16px;
@@ -46,7 +45,7 @@
 .header__profile-background {
   width: 30px;
   height: 30px;
-  background: #F9F9F9;
+  background: #f9f9f9;
   border-radius: 6px;
   display: flex;
 }
@@ -60,6 +59,9 @@
   height: 44px;
   margin-right: 30px;
   display: none;
+  background: url(../../images/Header/burger.svg) center center;
+  border: none;
+  padding: 0;
 }
 
 .header__register {
@@ -75,7 +77,7 @@
   text-decoration: none;
   width: 76px;
   height: 32px;
-  background: #2BE080;
+  background: #2be080;
   border-radius: 3px;
   display: flex;
   justify-content: center;
@@ -83,12 +85,24 @@
   margin-right: 70px;
 }
 
-.header__logo, .header__link-films, .header__link-films-saved, .header__profile, .header__burger, .header__register, .header__login {
+.header__logo,
+.header__link-films,
+.header__link-films-saved,
+.header__profile,
+.header__burger,
+.header__register,
+.header__login {
   transition: opacity 0.3s ease;
 }
 
-.header__logo:hover, .header__link-films:hover, .header__link-films-saved:hover, .header__profile:hover, .header__burger:hover, .header__register:hover, .header__login:hover {
-  opacity: .7;
+.header__logo:hover,
+.header__link-films:hover,
+.header__link-films-saved:hover,
+.header__profile:hover,
+.header__burger:hover,
+.header__register:hover,
+.header__login:hover {
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 770px) {
@@ -100,7 +114,9 @@
     margin-right: 30px;
   }
 
-  .header__link-films, .header__link-films-saved, .header__profile {
+  .header__link-films,
+  .header__link-films-saved,
+  .header__profile {
     display: none;
   }
 
@@ -131,5 +147,6 @@
     height: 43px;
     margin-right: 17px;
     cursor: pointer;
+    background-size: contain;
   }
 }

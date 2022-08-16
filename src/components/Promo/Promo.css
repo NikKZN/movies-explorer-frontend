@@ -2,7 +2,7 @@
   min-height: 560px;
   display: flex;
   flex-direction: column;
-  background: #465DFF;
+  background: #465dff;
 }
 
 .promo__title {
@@ -11,7 +11,7 @@
   font-size: 40px;
   line-height: 52px;
   letter-spacing: -0.04em;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 51px 0 0 70px;
 }
 
@@ -24,7 +24,7 @@
 @media screen and (max-width: 820px) {
   .promo {
     min-height: 844px;
-    align-items: center;    
+    align-items: center;
   }
 
   .promo__title {

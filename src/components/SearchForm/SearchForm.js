@@ -1,7 +1,6 @@
 import "./SearchForm.css";
 import icon from "../../images/SearchForm/icon.svg";
-import find from "../../images/SearchForm/find.svg";
-import CheckBox from "../CheckBox/CheckBox";
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
 function SearchForm() {
   return (
@@ -19,13 +18,9 @@ function SearchForm() {
                 maxLength="200"
                 required
               />
-              <button className="search__button">
-                <img className="search__button-icon" src={find} alt="Найти." />
-              </button>
+              <button className="search__button" type="submit"></button>
             </div>
-            <div className="search__checkbox">
-              <CheckBox />              
-            </div>
+            <FilterCheckbox />
           </form>
         </div>
       </section>

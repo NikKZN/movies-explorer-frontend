@@ -7,7 +7,13 @@ function Login() {
     <>
       <section className="login">
         <div className="login__content">
-          <img className="login__logo" src={logo} alt="Логотип фильмотека." />
+          <Link to="/">
+            <img
+              className="register__logo"
+              src={logo}
+              alt="Логотип фильмотека."
+            />
+          </Link>
           <h1 className="login__greeting">Рады видеть!</h1>
           <form className="login__form">
             <label className="login__label">
@@ -16,7 +22,7 @@ function Login() {
                 className="login__input"
                 name="email"
                 type="email"
-                placeholder="pochta@yandex.ru|"
+                placeholder="pochta@yandex.ru"
                 required
               />
               <span className="login__input-error">Что-то пошло не так...</span>

@@ -38,6 +38,13 @@
 .profile__input {
   text-align: right;
   border: none;
+  outline: none;
+  width: 50%;
+}
+
+.profile__input:focus {
+  border: 1px solid #2be080;
+  border-radius: 3px;
 }
 
 .profile__buttons {
@@ -48,24 +55,27 @@
 
 .profile__button-edit {
   font-weight: 400;
-  font-size: 13px;
-  line-height: 16px;
   border: none;
   background: none;
-  cursor: pointer;
   padding: 0 0 16px;
 }
 
 .profile__button-exit {
   font-weight: 500;
+  color: #ee3465;
+  text-decoration: none;
+  padding: 0;
+}
+
+.profile__button-edit, .profile__button-exit {
+  transition: opacity 0.3s ease;
   font-size: 13px;
   line-height: 16px;
-  text-align: center;
-  color: #ee3465;
-  border: none;
-  background: none;
   cursor: pointer;
-  padding: 0;
+}
+
+.profile__button-edit:hover, .profile__button-exit:hover {
+  opacity: .7;
 }
 
 @media screen and (max-width: 820px) {

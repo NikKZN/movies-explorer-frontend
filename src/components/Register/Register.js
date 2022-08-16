@@ -7,11 +7,13 @@ function Register() {
     <>
       <section className="register">
         <div className="register__content">
-          <img
-            className="register__logo"
-            src={logo}
-            alt="Логотип фильмотека."
-          />
+          <Link to="/">
+            <img
+              className="register__logo"
+              src={logo}
+              alt="Логотип фильмотека."
+            />
+          </Link>
           <h1 className="register__greeting">Добро пожаловать!</h1>
           <form className="register__form">
             <label className="register__label">
@@ -33,7 +35,7 @@ function Register() {
                 className="register__input"
                 name="email"
                 type="email"
-                placeholder="pochta@yandex.ru|"
+                placeholder="pochta@yandex.ru"
                 required
               />
               <span className="register__input-error">

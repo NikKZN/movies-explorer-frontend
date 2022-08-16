@@ -1,5 +1,6 @@
 import Header from "../Header/Header";
 import "./Profile.css";
+import { Link } from "react-router-dom";
 
 function Profile() {
   return (
@@ -33,9 +34,9 @@ function Profile() {
           <button className="profile__button-edit" type="submit">
             Редактировать
           </button>
-          <button className="profile__button-exit" type="button" role="link">
+          <Link to="/signin" className="profile__button-exit">
             Выйти из аккаунта
-          </button>
+          </Link>
         </div>
       </section>
     </>

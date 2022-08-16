@@ -46,6 +46,11 @@
   background: #f9f9f9;
   border-radius: 8px;
   margin-top: 10px;
+  outline: none;
+}
+
+.register__input:focus {
+  border: 1px solid #2be080;
 }
 
 .register__input-error {
@@ -69,6 +74,11 @@
   padding: 0;
   margin-top: 71px;
   cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.register__submit-button:hover {
+  opacity: .8;
 }
 
 .register__caption {
@@ -89,6 +99,11 @@
   margin-left: 6px;
   text-decoration: none;
   cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.register__caption-link:hover {
+  opacity: .7;
 }
 
 @media screen and (max-width: 820px) {
