@@ -6,7 +6,7 @@ import Navigation from "../Navigation/Navigation";
 
 function Header() {
   return (
-    <div className="header__container">
+    <header className="header__container">
       <Link to="/" className="header__logo">
         <img src={logo} alt="Логотип фильмотека." />
       </Link>
@@ -46,7 +46,7 @@ function Header() {
           </>
         )}
       </div>
-    </div>
+    </header>
   );
 }
 
