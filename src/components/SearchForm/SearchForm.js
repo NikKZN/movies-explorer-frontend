@@ -10,7 +10,7 @@ function SearchForm(props) {
   const [errorSearch, setErrorSearch] = useState('');//-Ошибка инпута
   const [inputSearch, setInputSearch] = useState('');//-Поисковый запрос
   const [allMovies, setAllMovies] = useState([]);//-Массив всех фильмов
-
+  const [isCheckboxState, setIsCheckboxState] = useState(false);//-Состояние чекбокса короткометражки
   function handleSubmit(input) {
     if (allMovies.length === 0) {
       moviesApi
@@ -22,7 +22,7 @@ function SearchForm(props) {
     } else {
       localStorage.setItem(
         "moviesByFilter",
-        JSON.stringify(searchByFilter(allMovies, input))
+        JSON.stringify(searchByFilter(allMovies, input, isCheckboxState))
       )
     }
   }  
@@ -70,7 +70,8 @@ function SearchForm(props) {
               ></button>
             </div>
             <FilterCheckbox
-
+              onChange={() => setIsCheckboxState(!isCheckboxState)}
+              checked={isCheckboxState}
             />
           </form>          
         </div>

@@ -13,7 +13,7 @@ function filterShortMovies(movies) {
 }
 
 //----Поисковый фильтр
-function searchByFilter(movies, searchQuery, filterCheckBox) {
+function searchByFilter(movies, searchQuery, checkboxState) {
   const moviesByFilter = movies.filter((movie) => {
       const userQuery = searchQuery.toLowerCase().trim();
       const movieRu = String(movie.nameRU).toLowerCase();
@@ -22,7 +22,7 @@ function searchByFilter(movies, searchQuery, filterCheckBox) {
     return movieRu.indexOf(userQuery) !== -1 || movieEn.indexOf(userQuery) !== -1;
   });
 
-  if (filterCheckBox) {
+  if (checkboxState) {
     return filterShortMovies(moviesByFilter)
   } else {
     return moviesByFilter;
