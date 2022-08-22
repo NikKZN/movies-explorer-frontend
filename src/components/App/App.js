@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";

@@ -1,26 +1,23 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import More from "../More/More";
-import Preloader from "../Preloader/Preloader";
+// import moviesApi from "../../utils/MoviesApi";
+// import Preloader from "../Preloader/Preloader";
 
-function MoviesCardList() {
+function MoviesCardList(props) {
+  
+  
   return (
     <>
       <section className="movies-card-list">
-        <div className="movies-card-list__element">
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <Preloader />
-        </div>
+        <ul className="movies-card-list__movies">
+          {props.movies.map((movie) => (
+            <MoviesCard
+              movie={movie}
+              key={movie.id}
+            />                        
+          ))}
+        </ul>
         <More />
       </section>
     </>
