@@ -1,8 +1,34 @@
 import "./Register.css";
+import React, { useState } from "react";
 import logo from "../../images/Header/header-logo.svg";
 import { Link } from "react-router-dom";
 
-function Register() {
+function Register(props) {
+  const [formParams, setFormParams] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormParams((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.handleRegister({
+      name: formParams.name,
+      email: formParams.email,
+      password: formParams.password,
+    });
+  }
+
+
+
   return (
     <>
       <section className="register">
@@ -15,14 +41,19 @@ function Register() {
             />
           </Link>
           <h1 className="register__greeting">Добро пожаловать!</h1>
-          <form className="register__form">
+          <form 
+            className="register__form"
+            onSubmit={handleSubmit}
+          >
             <label className="register__label">
               Имя
               <input
                 className="register__input"
                 name="name"
+                value={formParams.name}
                 type="text"
-                placeholder="Виталий"
+                placeholder="Имя"
+                onChange={handleChange}
                 required
               />
               <span className="register__input-error">
@@ -34,8 +65,10 @@ function Register() {
               <input
                 className="register__input"
                 name="email"
+                value={formParams.email}
                 type="email"
-                placeholder="pochta@yandex.ru"
+                placeholder="E-mail"
+                onChange={handleChange}
                 required
               />
               <span className="register__input-error">
@@ -47,8 +80,10 @@ function Register() {
               <input
                 className="register__input"
                 name="password"
+                value={formParams.password}
                 type="password"
                 placeholder="Пароль"
+                onChange={handleChange}
                 minLength="8"
                 autoComplete="off"
                 required
