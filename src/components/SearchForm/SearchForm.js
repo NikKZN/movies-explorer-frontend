@@ -2,42 +2,21 @@ import "./SearchForm.css";
 import icon from "../../images/SearchForm/icon.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useState } from "react";
-import moviesApi from "../../utils/MoviesApi";
-import { searchByFilter } from "../../utils/utils";
 
 function SearchForm(props) {
-  // const [isShortMovies, setIsShortMovies] = useState(false);
   const [errorSearch, setErrorSearch] = useState('');//-Ошибка инпута
   const [inputSearch, setInputSearch] = useState('');//-Поисковый запрос
-  const [allMovies, setAllMovies] = useState([]);//-Массив всех фильмов
-  const [isCheckboxState, setIsCheckboxState] = useState(false);//-Состояние чекбокса короткометражки
-  function handleSubmit(input) {
-    if (allMovies.length === 0) {
-      moviesApi
-      .getMovies()
-      .then((res) => {
-        setAllMovies(res)
-      })
-      .catch(alert);
-    } else {
-      localStorage.setItem(
-        "moviesByFilter",
-        JSON.stringify(searchByFilter(allMovies, input, isCheckboxState))
-      )
-    }
-  }  
 
   function handleSearchChange(e) {
     setInputSearch(e.target.value);
     setErrorSearch('');
   }  
 
+
   function handleSearchSubmit(e) {
     e.preventDefault();
-    inputSearch ? handleSubmit(inputSearch) : setErrorSearch("Нужно ввести ключевое слово!");
+    inputSearch ? props.handleSubmit(inputSearch) : setErrorSearch("Нужно ввести ключевое слово!");
   }
-
-  
 
   return (
     <>
@@ -59,7 +38,7 @@ function SearchForm(props) {
                 minLength="1"
                 maxLength="200"
                 required
-                value={inputSearch ?? ""}
+                value={inputSearch || props.value}
                 onChange={handleSearchChange}
               />
               <span className="search__input-error">{errorSearch}</span>
@@ -70,8 +49,8 @@ function SearchForm(props) {
               ></button>
             </div>
             <FilterCheckbox
-              onChange={() => setIsCheckboxState(!isCheckboxState)}
-              checked={isCheckboxState}
+              onChange={props.onChangeCheckbox}
+              checked={props.checkedCheckbox}
             />
           </form>          
         </div>

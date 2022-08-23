@@ -9,7 +9,7 @@ function SavedMovies() {
       <Header />
       <main>
         <SearchForm />
-        <MoviesCardList />
+        {/* <MoviesCardList /> */}
       </main>
       <Footer />
     </>

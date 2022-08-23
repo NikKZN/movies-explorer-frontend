@@ -18,7 +18,7 @@ function MoviesCardList(props) {
             />                        
           ))}
         </ul>
-        <More />
+        {/* <More /> */}
       </section>
     </>
   );
