@@ -1,8 +1,21 @@
+import React, { useEffect } from "react";
+import useFormValidation from "../../hooks/useFormValidation";
 import "./Login.css";
 import logo from "../../images/Header/header-logo.svg";
 import { Link } from "react-router-dom";
 
-function Login() {
+function Login(props) {
+  const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.handleLogin(values);    
+  }
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
+
   return (
     <>
       <section className="login">
@@ -15,7 +28,10 @@ function Login() {
             />
           </Link>
           <h1 className="login__greeting">Рады видеть!</h1>
-          <form className="login__form">
+          <form 
+            className="login__form"
+            onSubmit={handleSubmit}
+          >
             <label className="login__label">
               E-mail
               <input
@@ -23,9 +39,11 @@ function Login() {
                 name="email"
                 type="email"
                 placeholder="pochta@yandex.ru"
+                onChange={handleChange}
+                value={values.email || ''}
                 required
               />
-              <span className="login__input-error">Что-то пошло не так...</span>
+              <span className="login__input-error">{errors.email || ''}</span>
             </label>
             <label className="login__label">
               Пароль
@@ -36,11 +54,14 @@ function Login() {
                 placeholder="Пароль"
                 minLength="8"
                 autoComplete="off"
+                onChange={handleChange}
+                value={values.password || ''}
                 required
               />
-              <span className="login__input-error">Что-то пошло не так...</span>
+              <span className="login__input-error">{errors.password || ''}</span>
             </label>
-            <button className="login__submit-button" type="submit">
+            <p className="login__error">{props.isErrMessage || ''}</p>
+            <button className={`login__submit-button ${!isValid && 'login__submit-button_disabled'}`}>
               Войти
             </button>
             <p className="login__caption">

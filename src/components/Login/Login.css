@@ -50,7 +50,7 @@
 }
 
 .login__input:focus {
-  border: 1px solid #2be080;
+  outline: 1px solid #A0A0A0;
 }
 
 .login__input-error {
@@ -59,6 +59,17 @@
   line-height: 12px;
   color: #ee3465;
   margin-top: 8px;
+  min-height: 12px;
+}
+
+.login__error {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  color: #FF004C;
+  min-height: 11px;
+  margin: 128px 0 0;
 }
 
 .login__submit-button {
@@ -72,9 +83,15 @@
   text-align: center;
   color: #ffffff;
   padding: 0;
-  margin-top: 159px;
+  margin-top: 20px;
   cursor: pointer;
   transition: opacity 0.3s ease;
+}
+
+.login__submit-button_disabled {
+  background: #F8F8F8;
+  cursor: default;
+  color: #C2C2C2;
 }
 
 .login__submit-button:hover {
