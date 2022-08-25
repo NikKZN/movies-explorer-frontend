@@ -4,14 +4,14 @@ import logo from "../../images/Header/header-logo.svg";
 import profileIcon from "../../images/Header/profile-icon.svg";
 import Navigation from "../Navigation/Navigation";
 
-function Header() {
+function Header(props) {
   return (
-    <header className="header__container">
+    <header className={`header__container ${props.loggedIn ? 'header__container_registered' : ''}`}>
       <Link to="/" className="header__logo">
         <img src={logo} alt="Логотип фильмотека." />
       </Link>
       <div className="header__account">
-        {true ? (
+        {props.loggedIn ? (
           <>
             <Link to="/movies" className="header__link-films">
               Фильмы
