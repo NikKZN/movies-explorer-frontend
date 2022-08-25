@@ -1,33 +1,20 @@
 import "./Register.css";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import logo from "../../images/Header/header-logo.svg";
 import { Link } from "react-router-dom";
+import useFormValidation from "../../hooks/useFormValidation";
 
 function Register(props) {
-  const [formParams, setFormParams] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormParams((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.handleRegister({
-      name: formParams.name,
-      email: formParams.email,
-      password: formParams.password,
-    });
+    props.handleRegister(values);    
   }
 
-
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   return (
     <>
@@ -44,20 +31,22 @@ function Register(props) {
           <form 
             className="register__form"
             onSubmit={handleSubmit}
+            noValidate
           >
             <label className="register__label">
               Имя
               <input
                 className="register__input"
                 name="name"
-                value={formParams.name}
+                value={values.name || ''}
                 type="text"
                 placeholder="Имя"
                 onChange={handleChange}
+                minLength="2"
                 required
               />
               <span className="register__input-error">
-                Что-то пошло не так...
+                {errors.name || ''}
               </span>
             </label>
             <label className="register__label">
@@ -65,14 +54,14 @@ function Register(props) {
               <input
                 className="register__input"
                 name="email"
-                value={formParams.email}
+                value={values.email || ''}
                 type="email"
                 placeholder="E-mail"
                 onChange={handleChange}
                 required
               />
               <span className="register__input-error">
-                Что-то пошло не так...
+                {errors.email || ''}
               </span>
             </label>
             <label className="register__label">
@@ -80,7 +69,7 @@ function Register(props) {
               <input
                 className="register__input"
                 name="password"
-                value={formParams.password}
+                value={values.password || ''}
                 type="password"
                 placeholder="Пароль"
                 onChange={handleChange}
@@ -89,10 +78,15 @@ function Register(props) {
                 required
               />
               <span className="register__input-error">
-                Что-то пошло не так...
+                {errors.password || ''}
               </span>
             </label>
-            <button className="register__submit-button" type="submit">
+            <p className="register__error">{props.isErrMessage || ''}</p>
+            <button
+              className={`register__submit-button ${!isValid && 'register__submit-button_disabled'}`}
+              type="submit"
+              disabled={!isValid}
+            >
               Зарегистрироваться
             </button>
             <p className="register__caption">
