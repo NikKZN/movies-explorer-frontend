@@ -90,6 +90,18 @@ class MainApi {
       credentials: 'include',
     }).then(this._checkReponse);
   }
+
+  logout() {
+    return fetch(`${BASE_URL}/signout`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    })
+    .then(this._checkReponse);
+  }
 }
 
 const mainApi = new MainApi({

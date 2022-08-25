@@ -1,7 +1,5 @@
-import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import Footer from "../Footer/Footer";
 import moviesApi from "../../utils/MoviesApi";
 import { searchByFilter } from "../../utils/utils";
 import { useState, useEffect } from "react";
@@ -55,23 +53,22 @@ function Movies(props) {
     }
   }  
 
-  function showMovies() {
-    const getMovies = JSON.parse(localStorage.getItem("moviesByFilter"));
-    setUserSearchMovies(getMovies.userMovies);
-    setSearchQuerySaved(getMovies.userSearchInput)
-    setIsShortMovies(getMovies.userStateCheckbox)
+  // function showMovies() {
+  //   const getMovies = JSON.parse(localStorage.getItem("moviesByFilter"));
+  //   setUserSearchMovies(getMovies.userMovies);
+  //   setSearchQuerySaved(getMovies.userSearchInput)
+  //   setIsShortMovies(getMovies.userStateCheckbox)
 
-  }
+  // }
   
 
-  useEffect(() => {
-    showMovies();
-  }, []);
+  // useEffect(() => {
+  //   showMovies();
+  // }, []);
   
 
   return (
     <>
-      <Header />
       <main>
         <SearchForm
           handleSubmit={handleSubmit}
@@ -90,7 +87,6 @@ function Movies(props) {
           />
         )}
       </main>
-      <Footer />
     </>
   );
 }
