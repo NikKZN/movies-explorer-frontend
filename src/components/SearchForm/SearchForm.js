@@ -1,28 +1,33 @@
 import "./SearchForm.css";
 import icon from "../../images/SearchForm/icon.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useFormValidation from "../../hooks/useFormValidation";
+import { MISSING_INPUT } from "../../utils/constants";
 
 function SearchForm(props) {
-  const [errorSearch, setErrorSearch] = useState('');//-Ошибка инпута
-  const [inputSearch, setInputSearch] = useState('');//-Поисковый запрос
-
-  function handleSearchChange(e) {
-    setInputSearch(e.target.value);
-    setErrorSearch('');
-  }  
-
+  const { values, handleChange, isValid } = useFormValidation();
+  const [searchError, setSearchError] = useState("");
 
   function handleSearchSubmit(e) {
     e.preventDefault();
-    inputSearch ? props.handleSubmit(inputSearch) : setErrorSearch("Нужно ввести ключевое слово!");
+    if (values.search) {
+      props.handleSubmit(values.search);
+      setSearchError("");
+    } else {
+      setSearchError(MISSING_INPUT);
+    }
   }
+
+  useEffect(() => {
+    setSearchError("");
+  }, [isValid]);
 
   return (
     <>
       <section className="search">
         <div className="search__wrapper">
-          <form 
+          <form
             className="search__form"
             onSubmit={handleSearchSubmit}
             noValidate
@@ -30,20 +35,22 @@ function SearchForm(props) {
             <div className="search__container">
               <img className="search__icon" src={icon} alt="Иконка поиска." />
               <input
-                className="search__input"
+                className={`search__input ${
+                  searchError ? "search__input_invalid" : ""
+                }`}
                 type="text"
                 name="search"
-                placeholder="Фильм"
+                placeholder={"Фильм"}
                 autoComplete="off"
                 minLength="1"
                 maxLength="200"
                 required
-                value={inputSearch || props.value}
-                onChange={handleSearchChange}
+                value={values.search || ""}
+                onChange={handleChange}
               />
-              <span className="search__input-error">{errorSearch}</span>
-              <button 
-                className="search__button" 
+              <span className="search__input-error">{searchError || ""}</span>
+              <button
+                className="search__button"
                 type="submit"
                 onClick={props.onClick}
               ></button>
@@ -52,7 +59,7 @@ function SearchForm(props) {
               onChange={props.onChangeCheckbox}
               checked={props.checkedCheckbox}
             />
-          </form>          
+          </form>
         </div>
       </section>
     </>
