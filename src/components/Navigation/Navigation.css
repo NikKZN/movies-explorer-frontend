@@ -9,12 +9,17 @@
     align-items: center;
     justify-content: space-between;
     width: 520px;
+    height: 100vh;
     background-color: white;
-    min-height: 100vh;
     position: absolute;
     right: 0;
-    top: 0;
+    top: -100vh;
     z-index: 5;
+    transition: top 0.3s;
+  }
+
+  .header__menu_active {
+    top: 0;
   }
 
   .menu__nav {

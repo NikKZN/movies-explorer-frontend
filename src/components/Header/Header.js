@@ -1,4 +1,5 @@
 import "./Header.css";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/Header/header-logo.svg";
 import profileIcon from "../../images/Header/profile-icon.svg";
@@ -6,6 +7,15 @@ import Navigation from "../Navigation/Navigation";
 
 function Header(props) {
   const location = useLocation().pathname;
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+
+  function openBurgerMenu() {
+    setIsBurgerOpen(true);
+  }
+
+  function closeBurgerMenu() {
+    setIsBurgerOpen(false);
+  }
 
   return (
     <header
@@ -54,9 +64,16 @@ function Header(props) {
                 </div>
               </>
             </Link>
-            <button type="button" className="header__burger"></button>
+            <button
+              type="button"
+              className="header__burger"
+              onClick={openBurgerMenu}
+            ></button>
 
-            <Navigation />
+            <Navigation
+              isBurgerOpen={isBurgerOpen}
+              closeBurgerMenu={closeBurgerMenu}
+            />
           </>
         ) : (
           <>
