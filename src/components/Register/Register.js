@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import useFormValidation from "../../hooks/useFormValidation";
 
 function Register(props) {
-  const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.handleRegister(values);    
+    props.handleRegister(values);
   }
 
   useEffect(() => {
@@ -28,40 +29,36 @@ function Register(props) {
             />
           </Link>
           <h1 className="register__greeting">Добро пожаловать!</h1>
-          <form 
-            className="register__form"
-            onSubmit={handleSubmit}
-            noValidate
-          >
+          <form className="register__form" onSubmit={handleSubmit} noValidate>
             <label className="register__label">
               Имя
               <input
                 className="register__input"
                 name="name"
-                value={values.name || ''}
+                value={values.name || ""}
                 type="text"
                 placeholder="Имя"
-                onChange={handleChange}
                 minLength="2"
+                maxLength="30"
+                pattern="^[A-Za-zЁёА-Яа-я /s -]+$"
+                onChange={handleChange}
                 required
               />
-              <span className="register__input-error">
-                {errors.name || ''}
-              </span>
+              <span className="register__input-error">{errors.name || ""}</span>
             </label>
             <label className="register__label">
               E-mail
               <input
                 className="register__input"
                 name="email"
-                value={values.email || ''}
+                value={values.email || ""}
                 type="email"
                 placeholder="E-mail"
                 onChange={handleChange}
                 required
               />
               <span className="register__input-error">
-                {errors.email || ''}
+                {errors.email || ""}
               </span>
             </label>
             <label className="register__label">
@@ -69,7 +66,7 @@ function Register(props) {
               <input
                 className="register__input"
                 name="password"
-                value={values.password || ''}
+                value={values.password || ""}
                 type="password"
                 placeholder="Пароль"
                 onChange={handleChange}
@@ -78,12 +75,14 @@ function Register(props) {
                 required
               />
               <span className="register__input-error">
-                {errors.password || ''}
+                {errors.password || ""}
               </span>
             </label>
-            <p className="register__error">{props.isErrMessage || ''}</p>
+            <p className="register__error">{props.isErrMessage || ""}</p>
             <button
-              className={`register__submit-button ${!isValid && 'register__submit-button_disabled'}`}
+              className={`register__submit-button ${
+                !isValid && "register__submit-button_disabled"
+              }`}
               type="submit"
               disabled={!isValid}
             >

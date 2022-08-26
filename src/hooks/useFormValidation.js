@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
-import isEmail from 'validator/es/lib/isEmail';
+import isEmail from "validator/es/lib/isEmail";
+import { NAME_VALIDATION, EMAIL_VALIDATION } from "../utils/constants";
 
 export default function useFormValidation() {
   const [values, setValues] = useState({});
@@ -9,28 +10,24 @@ export default function useFormValidation() {
   const handleChange = (e) => {
     const input = e.target;
     const name = input.name;
-    const value = input.value;    
+    const value = input.value;
 
-    if (name === 'name') {
-      const regex = /^[а-яА-ЯёЁa-zA-Z -]$/;
-      if (!regex.test(value)) {
-        input.setCustomValidity('Имя должно содержать только латиницу, кириллицу, пробел или дефис.');
-      } else {
-        input.setCustomValidity('');
-        console.log('сброс')
-      }
+    if (name === "name" && input.validity.patternMismatch) {
+      input.setCustomValidity(NAME_VALIDATION);
+    } else {
+      input.setCustomValidity("");
     }
 
-    if (name === 'email') {
+    if (name === "email") {
       if (!isEmail(value)) {
-          input.setCustomValidity('Некорректый E-mail.');
+        input.setCustomValidity(EMAIL_VALIDATION);
       } else {
-        input.setCustomValidity('');
+        input.setCustomValidity("");
       }
     }
 
-    setValues({...values, [name]: value});
-    setErrors({...errors, [name]: input.validationMessage });
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: input.validationMessage });
     setIsValid(input.closest("form").checkValidity());
   };
 
