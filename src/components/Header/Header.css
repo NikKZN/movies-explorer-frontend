@@ -6,7 +6,7 @@
 }
 
 .header__container_registered {
-  background: #FFFFFF;
+  background: #ffffff;
 }
 
 .header__logo {
@@ -16,11 +16,16 @@
 }
 
 .header__link-films {
+  font-weight: 400;
   font-size: 14px;
   line-height: 18px;
   text-decoration: none;
   margin-right: 22px;
   color: #000000;
+}
+
+.header__link-films_active {
+  font-weight: 500;
 }
 
 .header__link-films-saved {
@@ -32,12 +37,17 @@
   color: #000000;
 }
 
+.header__link-films-saved_active {
+  font-weight: 500;
+}
+
 .header__account {
   display: flex;
   align-items: center;
 }
 
 .header__profile {
+  font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   display: flex;
@@ -47,6 +57,10 @@
   width: 100px;
   margin-right: 70px;
   color: #000000;
+}
+
+.header__profile_active {
+  font-weight: 500;
 }
 
 .header__profile-background {
@@ -76,7 +90,7 @@
   line-height: 16px;
   text-decoration: none;
   margin-right: 30px;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .header__login {
@@ -113,8 +127,6 @@
 .header__login:hover {
   opacity: 0.7;
 }
-
-
 
 @media screen and (max-width: 770px) {
   .header__logo {

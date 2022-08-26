@@ -1,31 +1,36 @@
 import "./Navigation.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import profileIcon from "../../images/Header/profile-icon.svg";
 import close from "../../images/Navigation/close.svg";
 
 function Navigation() {
+  const location = useLocation().pathname;
+
   return (
     <nav className="menu header__menu">
       <img className="menu__close" src={close} alt="Иконка аккаунта." />
       <div className="menu__nav">
         <Link
           to="/"
-          // onClick={props.handleSignOut}
-          className="menu__link-main-page"
+          className={`menu__link-main-page ${
+            location === "/" ? "menu__link-main-page_active" : ""
+          }`}
         >
           Главная
         </Link>
         <Link
           to="/movies"
-          // onClick={props.handleSignOut}
-          className="menu__link-films"
+          className={`menu__link-films ${
+            location === "/movies" ? "menu__link-films_active" : ""
+          }`}
         >
           Фильмы
         </Link>
         <Link
           to="/saved-movies"
-          // onClick={props.handleSignOut}
-          className="menu__link-films-saved"
+          className={`menu__link-films-saved ${
+            location === "/saved-movies" ? "menu__link-films-saved_active" : ""
+          }`}
         >
           Сохранённые фильмы
         </Link>
@@ -33,8 +38,9 @@ function Navigation() {
 
       <Link
         to="/profile"
-        // onClick={props.handleSignOut}
-        className="menu__profile"
+        className={`menu__profile ${
+          location === "/profile" ? "menu__profile_active" : ""
+        }`}
       >
         Аккаунт
         <>
