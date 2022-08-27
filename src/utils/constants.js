@@ -10,6 +10,9 @@ const MISSING_INPUT = "Нужно ввести ключевое слово.";
 const NAME_VALIDATION =
   "Имя должно содержать только латиницу, кириллицу, пробел или дефис.";
 const EMAIL_VALIDATION = "Некорректый E-mail.";
+const REQUEST_ERROR = "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.";
+const NOT_FOUND = "Ничего не найдено!";
+const SEARCH_VALIDATION = "Чтобы увидеть фильмы, начните поиск!";
 
 export {
   MOVIES_URL,
@@ -18,4 +21,7 @@ export {
   MISSING_INPUT,
   NAME_VALIDATION,
   EMAIL_VALIDATION,
+  REQUEST_ERROR,
+  NOT_FOUND,
+  SEARCH_VALIDATION,
 };

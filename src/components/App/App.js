@@ -131,7 +131,7 @@ function App() {
       <div className="page">
         <Route exact path={headerPath}>
           <Header
-            loggedIn={loggedIn}
+            loggedIn={loggedIn}            
           />
         </Route>
         <Switch>

@@ -8,29 +8,22 @@ function durationConverter(duration) {
 }
 
 //----Фильтрация короткометражек
-function filterShortMovies(movies) {
-  return movies.filter(movie => movie.duration <= DURATION_SHORT_MOVIES);
+function shortMovies(movies) {
+  return movies.filter((movie) => movie.duration <= DURATION_SHORT_MOVIES);
 }
 
-//----Поисковый фильтр
-function searchByFilter(movies, searchQuery, checkboxState) {
+// ----Поиск по запросу
+function searchByRequest(movies, searchQuery) {
   const moviesByFilter = movies.filter((movie) => {
-      const userQuery = searchQuery.toLowerCase().trim();
-      const movieRu = String(movie.nameRU).toLowerCase();
-      const movieEn = String(movie.nameEN).toLowerCase();
-      
-    return movieRu.indexOf(userQuery) !== -1 || movieEn.indexOf(userQuery) !== -1;
-  });
+    const userQuery = searchQuery.toLowerCase().trim();
+    const movieRu = String(movie.nameRU).toLowerCase();
+    const movieEn = String(movie.nameEN).toLowerCase();
 
-  if (checkboxState) {
-    return filterShortMovies(moviesByFilter)
-  } else {
-    return moviesByFilter;
-  }
+    return (
+      movieRu.indexOf(userQuery) !== -1 || movieEn.indexOf(userQuery) !== -1
+    );
+  });
+  return moviesByFilter;
 }
 
-export { 
-  durationConverter,
-  searchByFilter,
-  filterShortMovies,
-};
+export { durationConverter, searchByRequest, shortMovies };

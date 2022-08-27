@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100px;
+  margin: 0 70px;
 }
 
 .movies_not_found__text {
@@ -12,4 +13,27 @@
   line-height: 18px;
   color: #EE3465;
   margin: 0;
+  text-align: center;
+}
+
+@media screen and (max-width: 770px) {
+  .movies_not_found {
+    margin: 0 30px;
+  }
+
+  .movies_not_found__text {
+    font-size: 13px;
+    line-height: 16px;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .movies_not_found {
+    margin: 0 10px;
+  }
+
+  .movies_not_found__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

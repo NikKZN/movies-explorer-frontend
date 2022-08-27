@@ -40,7 +40,7 @@ function SearchForm(props) {
                 }`}
                 type="text"
                 name="search"
-                placeholder={"Фильм"}
+                placeholder={props.value || "Фильм"}
                 autoComplete="off"
                 minLength="1"
                 maxLength="200"
