@@ -3,10 +3,6 @@ import { useHistory } from 'react-router-dom';
 
 function NotFound() {
   const history = useHistory();
-  
-  function goBack() {
-    history.goBack();
-  }
 
   return (
     <>
@@ -16,7 +12,7 @@ function NotFound() {
         <button 
           className="not-found__back-button" 
           type="button"
-          onClick={goBack}
+          // onClick={history.goBack}
         >
           Назад
         </button>

@@ -232,11 +232,11 @@ function App() {
               isErrMessage={isErrMessage}
             />
           </Route>
-          <Route path="*">
-            <NotFound />
-          </Route>
           <Route>
             {loggedIn ? <Redirect to="/" /> : <Redirect to="signin" />}
+          </Route>
+          <Route path="*">
+            <NotFound />
           </Route>
         </Switch>
         <Route exact path={footerPath}>
