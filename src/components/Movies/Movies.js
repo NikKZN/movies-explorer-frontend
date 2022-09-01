@@ -9,7 +9,6 @@ import {
   REQUEST_ERROR,
   NOT_FOUND,
   SEARCH_VALIDATION,
-  DURATION_SHORT_MOVIES,
 } from "../../utils/constants";
 
 function Movies(props) {
@@ -20,7 +19,6 @@ function Movies(props) {
   const [moviesNotFound, setMoviesNotFound] = useState(false); //-Если ничего не найдено
   const [searchMessage, setSearchMessage] = useState(""); //-Сщщбщение о результатах поиска
   const [isLoading, setIsLoading] = useState(false); //-Активатор прелоадера
-  const [isShowMore, setIsShowMore] = useState(false); //-Показать кнопку "Ещё"
 
   //---Проверяем наличие базы фильмов
   function handleSubmit(searchInput) {
@@ -31,14 +29,14 @@ function Movies(props) {
         .getMovies()
         .then((movies) => {
           setAllMovies(movies);
-          localStorage.setItem("allMovies", JSON.stringify(movies));
           handleSearchMovies(movies, searchInput);
-          setIsLoading(false);
         })
         .catch(() => {
-          setIsLoading(false);
           setSearchMessage(REQUEST_ERROR);
           setMoviesNotFound(true);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     } else {
       handleSearchMovies(allMovies, searchInput);
@@ -79,23 +77,26 @@ function Movies(props) {
   }
 
   //---Получаем результат поиска
-  function showMovies() {
+  function getSearchResult() {
     setUserSearchMovies(JSON.parse(localStorage.getItem("userMovies")));
     setSearchQuerySaved(localStorage.getItem("userSearchInput"));
     setIsShortMovies(JSON.parse(localStorage.getItem("userStateCheckbox")));
   }
 
+  //---Отображаем результат поиска
   useEffect(() => {
     if (localStorage.userMovies) {
-      showMovies();
+      getSearchResult();
     } else {
       setMoviesNotFound(true);
       setSearchMessage(SEARCH_VALIDATION);
     }
   }, []);
 
+  //---Эффект от переключателя короткометражек
   useEffect(() => {
     searchByShortMovies(userSearchMovies);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShortMovies]);
 
   return (
@@ -113,9 +114,13 @@ function Movies(props) {
           <MoviesSearchError message={searchMessage} />
         ) : (
           <MoviesCardList
-            movies={userSearchMovies}
+            searchMovies={userSearchMovies}
+            savedMovies={props.savedMovies}
             isLoading={isLoading}
-            isShowMore={isShowMore}
+            onSaveClick={props.onSaveClick}
+            onDeleteClick={props.onDeleteClick}
+            isLiked={props.isLiked}
+            isSaved={false}
           />
         )}
       </main>
