@@ -1,10 +1,14 @@
 import "./More.css";
 
-function More() {
+function More(props) {
   return (
     <>
       <div className="more">
-        <button className="more__button" type="button">
+        <button
+          className="more__button"
+          type="button"
+          onClick={props.onClick}
+        >
           Ещё
         </button>
       </div>
