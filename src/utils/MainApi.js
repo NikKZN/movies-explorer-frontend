@@ -57,7 +57,7 @@ class MainApi {
 
   //---Удаление фильма из сохранённых
   deleteMovie(movieId) {
-    return fetch(`${this._address}/movies/${movieId}`, {
+    return fetch(`${this._baseUrl}/movies/${movieId}`, {
       method: 'DELETE',
       eaders: this._headers,
       credentials: 'include',
