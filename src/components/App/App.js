@@ -1,6 +1,12 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import { Route, Redirect, Switch, useHistory } from "react-router-dom";
+import {
+  Route,
+  Redirect,
+  Switch,
+  useHistory,
+} from "react-router-dom";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Movies from "../Movies/Movies";
@@ -13,8 +19,7 @@ import InfoTooltipPopup from "../InfoTooltipPopup/InfoTooltipPopup";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Main from "../Main/Main";
 import mainApi from "../../utils/MainApi";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-
+import { MOVIE_BASE_URL, PROFILE_EDIT_TRUE } from "../../utils/constants";
 
 function App() {
   const history = useHistory();
@@ -23,11 +28,13 @@ function App() {
     isOpen: false,
     status: true,
     message: "",
-  });
+  }); //-Информационный попап
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isErrMessage, setIsErrMessage] = useState('');
-  const headerPath = ['/', '/movies', '/saved-movies', '/profile'];
-  const footerPath = ['/', '/movies', '/saved-movies'];
+  const [isErrMessage, setIsErrMessage] = useState("");
+  const headerPath = ["/", "/movies", "/saved-movies", "/profile"]; //-Локации хедера
+  const footerPath = ["/", "/movies", "/saved-movies"]; //-Локации футера
+  const [isLiked, setIsLiked] = useState(false); //- Отметка сохранить
+  const [isSavedMovies, setIsSavedMovies] = useState([]); //-Сохранённые фильмы
 
   //---Выводит сообщение об ошибке
   function informError(err) {
@@ -46,29 +53,31 @@ function App() {
         if (res._id) {
           handleLogin({ email, password });
         }
-        setIsErrMessage(res.message)
+        setIsErrMessage(res.message);
       })
-      .catch((err) => informError(err))
+      .catch((err) => informError(err));
   }
 
   //---Вход
   function handleLogin({ email, password }) {
     mainApi
       .login(email, password)
-      .then((res) => {        
+      .then((res) => {
         if (res.token) {
           tokenCheck();
         }
-        setIsErrMessage(res.message)
+        setIsErrMessage(res.message);
       })
-      .catch((err) => informError(err))
+      .catch((err) => informError(err));
   }
 
+  //---Монтирование tokenCheck()
   useEffect(() => {
     tokenCheck();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  //---Проверяем токен
   function tokenCheck() {
     mainApi
       .getUserInfo()
@@ -86,15 +95,15 @@ function App() {
   function handleProfile({ name, email }) {
     mainApi
       .setUserInfo(name, email)
-      .then(newUser => {
+      .then((newUser) => {
         setCurrentUser(newUser);
         setIsInfoToolTip({
           isOpen: true,
           status: true,
-          message: "Ваши данные изменены.",
+          message: PROFILE_EDIT_TRUE,
         });
       })
-      .catch((err) => informError(err))
+      .catch((err) => informError(err));
   }
 
   //---Выход из аккаунта
@@ -103,9 +112,56 @@ function App() {
       .logout()
       .then(() => {
         setLoggedIn(false);
-        // setIsBurgerMenuOpen(false);
         localStorage.clear();
         history.push("/");
+      })
+      .catch((err) => informError(err));
+  }
+
+  //---Сохранение фильма
+  function handleSaveMovie(movie) {
+    const newMovie = {
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: MOVIE_BASE_URL + movie.image.url,
+      trailerLink: movie.trailerLink,
+      thumbnail: MOVIE_BASE_URL + movie.image.formats.thumbnail.url,
+      movieId: movie.id,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+    };
+    mainApi
+      .addMovie(newMovie)
+      .then(() => {
+        setIsLiked(true);
+        getSavedMovies();
+      })
+      .catch((err) => informError(err));
+  }
+
+  //---Получаем сохранённые фильмы c сервера
+  function getSavedMovies() {
+    mainApi
+      .getSavedMovies()
+      .then((movies) => {
+        setIsSavedMovies(movies);
+      })
+      .catch((err) => informError(err));
+  }
+
+  //---Удаление фильма
+  function handleDeleteMovie(movie) {
+    setIsLiked(false);
+    const savedMovie = isSavedMovies.find(
+      (i) => i.movieId === movie.id || i.movieId === movie.movieId
+    );
+    mainApi
+      .deleteMovie(savedMovie._id)
+      .then(() => {
+        getSavedMovies();
       })
       .catch((err) => informError(err));
   }
@@ -126,29 +182,38 @@ function App() {
     }
   }
 
+  useEffect(() => {}, []);
+
+  useEffect(() => {
+    if (loggedIn && currentUser) {
+      getSavedMovies();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser, loggedIn]);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Route exact path={headerPath}>
-          <Header
-            loggedIn={loggedIn}            
-          />
+          <Header loggedIn={loggedIn} />
         </Route>
         <Switch>
-          <Route 
-            exact path="/" 
-            component={Main}
-            loggedIn={loggedIn} 
-          />
+          <Route exact path="/" component={Main} loggedIn={loggedIn} />
           <ProtectedRoute
             path="/movies"
             component={Movies}
+            savedMovies={isSavedMovies}
             loggedIn={loggedIn}
+            onSaveClick={handleSaveMovie}
+            onDeleteClick={handleDeleteMovie}
+            isLiked={isLiked}
           />
           <ProtectedRoute
             path="/saved-movies"
             component={SavedMovies}
             loggedIn={loggedIn}
+            savedMovies={isSavedMovies}
+            onDeleteClick={handleDeleteMovie}
           />
           <ProtectedRoute
             path="/profile"
@@ -159,10 +224,7 @@ function App() {
             handleProfile={handleProfile}
           />
           <Route path="/signin">
-            <Login
-              handleLogin={handleLogin}
-              isErrMessage={isErrMessage}
-            />
+            <Login handleLogin={handleLogin} isErrMessage={isErrMessage} />
           </Route>
           <Route path="/signup">
             <Register
@@ -178,8 +240,8 @@ function App() {
           </Route>
         </Switch>
         <Route exact path={footerPath}>
-            <Footer />
-          </Route>
+          <Footer />
+        </Route>
         <InfoTooltipPopup
           isOpen={isInfoToolTip.isOpen}
           status={isInfoToolTip.status}
