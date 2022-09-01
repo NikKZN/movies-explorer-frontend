@@ -45,22 +45,22 @@ class MainApi {
     }).then(this._checkReponse);
   }
 
-  //---Сохранение фильма 
+  //---Сохранение фильма
   addMovie(data) {
     return fetch(`${this._baseUrl}/movies`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify(data),
-      credentials: 'include',
+      credentials: "include",
     }).then(this._checkReponse);
   }
 
   //---Удаление фильма из сохранённых
   deleteMovie(movieId) {
     return fetch(`${this._baseUrl}/movies/${movieId}`, {
-      method: 'DELETE',
+      method: "DELETE",
       eaders: this._headers,
-      credentials: 'include',
+      credentials: "include",
     }).then(this._checkReponse);
   }
 
@@ -83,24 +83,23 @@ class MainApi {
     return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ 
-        email, 
-        password 
+      body: JSON.stringify({
+        email,
+        password,
       }),
-      credentials: 'include',
+      credentials: "include",
     }).then(this._checkReponse);
   }
 
   logout() {
     return fetch(`${BASE_URL}/signout`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-      credentials: 'include',
-    })
-    .then(this._checkReponse);
+      credentials: "include",
+    }).then(this._checkReponse);
   }
 }
 

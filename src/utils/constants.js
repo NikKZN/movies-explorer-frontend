@@ -1,8 +1,8 @@
 const MOVIE_BASE_URL = "https://api.nomoreparties.co/";
 const MOVIES_URL = MOVIE_BASE_URL + "beatfilm-movies";
 
-// const BASE_URL = "https://api.filmoteka.nkzn.nomoredomains.xyz";
-const BASE_URL = "http://localhost:3001";
+const BASE_URL = "https://api.filmoteka.nkzn.nomoredomains.xyz";
+// const BASE_URL = "http://localhost:3001";
 
 const DURATION_SHORT_MOVIES = 40; //-Длительность короткометражек
 

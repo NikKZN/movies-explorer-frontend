@@ -1,4 +1,4 @@
-import { MOVIES_URL } from './constants';
+import { MOVIES_URL } from "./constants";
 
 class MoviesApi {
   constructor({ baseUrl }) {
@@ -9,11 +9,11 @@ class MoviesApi {
     const result = await res.json();
     return res.ok ? result : Promise.reject(res);
   }
-  
+
   getMovies() {
     return fetch(`${this._baseUrl}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
     }).then(this._checkReponse);
   }
 }
