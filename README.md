@@ -1,4 +1,4 @@
-
+Дипломная работа расположена по адресу: https://filmoteka.nkzn.nomoredomains.xyz
 
 Ссылка на макет Figma: https://www.figma.com/file/fmVqpObWgxpUAx5dHV6pEK/Diploma-Copy
 
