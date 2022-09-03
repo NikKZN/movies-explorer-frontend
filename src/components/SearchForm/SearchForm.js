@@ -1,18 +1,23 @@
 import "./SearchForm.css";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import icon from "../../images/SearchForm/icon.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import { useEffect, useState } from "react";
-import useFormValidation from "../../hooks/useFormValidation";
 import { MISSING_INPUT } from "../../utils/constants";
 
 function SearchForm(props) {
-  const { values, handleChange, isValid } = useFormValidation();
+  const location = useLocation().pathname;
+  const [inputValue, setInputValue] = useState("");
   const [searchError, setSearchError] = useState("");
+
+  function handleChange(e) {
+    setInputValue(e.target.value);
+  }
 
   function handleSearchSubmit(e) {
     e.preventDefault();
-    if (values.search) {
-      props.handleSubmit(values.search);
+    if (inputValue) {
+      props.handleSubmit(inputValue);
       setSearchError("");
     } else {
       setSearchError(MISSING_INPUT);
@@ -20,8 +25,14 @@ function SearchForm(props) {
   }
 
   useEffect(() => {
+    if (location === "/movies") {
+      setInputValue(localStorage.getItem("userSearchInput"));
+    }
+  }, [location]);
+
+  useEffect(() => {
     setSearchError("");
-  }, [isValid]);
+  }, []);
 
   return (
     <>
@@ -40,12 +51,12 @@ function SearchForm(props) {
                 }`}
                 type="text"
                 name="search"
-                placeholder={props.value || "Фильм"}
+                placeholder={"Фильм"}
                 autoComplete="off"
                 minLength="1"
                 maxLength="200"
                 required
-                value={values.search || ""}
+                value={inputValue || ""}
                 onChange={handleChange}
               />
               <span className="search__input-error">{searchError || ""}</span>

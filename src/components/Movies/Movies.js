@@ -12,91 +12,102 @@ import {
 } from "../../utils/constants";
 
 function Movies(props) {
-  const [allMovies, setAllMovies] = useState([]); //-Массив всех фильмов
   const [userSearchMovies, setUserSearchMovies] = useState([]); //-Фильмы по поиску
-  const [searchQuerySaved, setSearchQuerySaved] = useState(""); //-Поисковый запрос
-  const [isShortMovies, setIsShortMovies] = useState(false); //-Состояние чекбокса короткометражки
+  const [isShortMovies, setIsShortMovies] = useState(
+    localStorage.userStateCheckbox
+      ? JSON.parse(localStorage.getItem("userStateCheckbox"))
+      : false
+  ); //-Состояние чекбокса короткометражки
   const [moviesNotFound, setMoviesNotFound] = useState(false); //-Если ничего не найдено
   const [searchMessage, setSearchMessage] = useState(""); //-Сщщбщение о результатах поиска
   const [isLoading, setIsLoading] = useState(false); //-Активатор прелоадера
 
-  //---Проверяем наличие базы фильмов
-  function handleSubmit(searchInput) {
-    setIsLoading(true);
-    setSearchMessage("");
-    if (allMovies.length === 0) {
+  //---Проверяем фильмы в локальном хранилище
+  function checkMoviesInLocalStorage() {
+    if (!localStorage.allMovies) {
+      setIsLoading(true);
+      setSearchMessage("");
       moviesApi
         .getMovies()
         .then((movies) => {
-          setAllMovies(movies);
-          handleSearchMovies(movies, searchInput);
+          if (movies) {
+            localStorage.setItem("allMovies", JSON.stringify(movies));
+            handleSearchMovies();
+          } else {
+            setSearchMessage(REQUEST_ERROR);
+            setMoviesNotFound(true);
+          }
         })
-        .catch(() => {
-          setSearchMessage(REQUEST_ERROR);
+        .catch((err) => {
+          setSearchMessage(err);
           setMoviesNotFound(true);
         })
         .finally(() => {
           setIsLoading(false);
         });
     } else {
-      handleSearchMovies(allMovies, searchInput);
-      setIsLoading(false);
+      handleSearchMovies();
     }
+  }
+
+  //---Сабмит поиска
+  function handleSubmit(searchInput) {
+    localStorage.setItem("userSearchInput", searchInput);
     localStorage.setItem("userStateCheckbox", isShortMovies);
+    checkMoviesInLocalStorage();
   }
 
   //---Ищем фильмы по запросу
-  function handleSearchMovies(movies, searchInput) {
-    localStorage.setItem("userStateCheckbox", JSON.stringify(isShortMovies));
-    const moviesByRequest = searchByRequest(movies, searchInput);
-    if (moviesByRequest.length === 0) {
-      setSearchMessage(NOT_FOUND);
-      setMoviesNotFound(true);
+  function handleSearchMovies() {
+    const allMovies = JSON.parse(localStorage.getItem("allMovies"));
+    const userSearchInput = localStorage.getItem("userSearchInput");
+    const userStateCheckbox = JSON.parse(
+      localStorage.getItem("userStateCheckbox")
+    );
+    const moviesByRequest = searchByRequest(allMovies, userSearchInput);
+    const userShortMovies = shortMovies(moviesByRequest);
+    if (userStateCheckbox) {
+      getSearchResult(userShortMovies);
     } else {
-      setMoviesNotFound(false);
-      setSearchMessage("");
-      localStorage.setItem("userMovies", JSON.stringify(moviesByRequest));
-      localStorage.setItem("userSearchInput", searchInput);
-      searchByShortMovies(moviesByRequest);
-    }
-  }
-
-  //----Фильтрация короткометражек
-  function searchByShortMovies(moviesByRequest) {
-    if (isShortMovies && moviesByRequest) {
-      const userShortMovies = shortMovies(moviesByRequest);
-      if (userShortMovies.length === 0) {
-        setSearchMessage(NOT_FOUND);
-        setMoviesNotFound(true);
-      } else {
-        setUserSearchMovies(userShortMovies);
-      }
-    } else {
-      setUserSearchMovies(JSON.parse(localStorage.getItem("userMovies")));
+      getSearchResult(moviesByRequest);
     }
   }
 
   //---Получаем результат поиска
-  function getSearchResult() {
-    setUserSearchMovies(JSON.parse(localStorage.getItem("userMovies")));
-    setSearchQuerySaved(localStorage.getItem("userSearchInput"));
-    setIsShortMovies(JSON.parse(localStorage.getItem("userStateCheckbox")));
+  function getSearchResult(result) {
+    if (result.length === 0) {
+      setSearchMessage(NOT_FOUND);
+      setMoviesNotFound(true);
+    } else {
+      setSearchMessage("");
+      setMoviesNotFound(false);
+      setUserSearchMovies(result);
+    }
   }
 
   //---Отображаем результат поиска
   useEffect(() => {
-    if (localStorage.userMovies) {
-      getSearchResult();
-    } else {
-      setMoviesNotFound(true);
+    if (!localStorage.allMovies) {
       setSearchMessage(SEARCH_VALIDATION);
+      setMoviesNotFound(true);
+    } else {
+      setSearchMessage("");
+      setMoviesNotFound(false);
+      handleSearchMovies();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  //---Эффект от переключателя короткометражек
   useEffect(() => {
-    searchByShortMovies(userSearchMovies);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    localStorage.setItem("userStateCheckbox", isShortMovies);
+    if (
+      localStorage.allMovies &&
+      localStorage.userSearchInput &&
+      localStorage.userStateCheckbox
+    ) {
+      handleSearchMovies();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShortMovies]);
 
   return (
@@ -104,7 +115,6 @@ function Movies(props) {
       <main>
         <SearchForm
           handleSubmit={handleSubmit}
-          value={searchQuerySaved}
           onChangeCheckbox={() => setIsShortMovies(!isShortMovies)}
           checkedCheckbox={isShortMovies}
         />
