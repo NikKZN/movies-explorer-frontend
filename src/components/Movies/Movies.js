@@ -115,6 +115,7 @@ function Movies(props) {
       <main>
         <SearchForm
           handleSubmit={handleSubmit}
+          // value={}
           onChangeCheckbox={() => setIsShortMovies(!isShortMovies)}
           checkedCheckbox={isShortMovies}
         />

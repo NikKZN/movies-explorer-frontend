@@ -113,8 +113,9 @@ function App() {
   function handleSignOut() {
     mainApi
       .logout()
-      .then(() => {
+      .then((res) => {
         setLoggedIn(false);
+        setCurrentUser({});
         localStorage.clear();
         history.push("/");
       })
@@ -185,7 +186,7 @@ function App() {
     }
   }
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   useEffect(() => {
     if (loggedIn && currentUser) {
