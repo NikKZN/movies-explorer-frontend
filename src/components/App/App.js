@@ -86,6 +86,9 @@ function App() {
           setCurrentUser(res);
           setLoggedIn(true);
           history.push("/movies");
+        } else {
+          setLoggedIn(false);
+          history.push("/signin");
         }
       })
       .catch((err) => informError(err));
