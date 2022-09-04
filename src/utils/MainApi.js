@@ -7,13 +7,15 @@ class MainApi {
   }
 
   _checkReponse(res) {
-    if (res.status === 400) {
+    if (res) {
+      return res.json();
+    } else if (res.status === 400) {
       throw new Error("Переданы некоректные данные!");
     } else if (res.status === 404) {
       throw new Error("Объект не найден!");
     } else if (res.status === 500) {
       throw new Error("На сервере произошла ошибка!");
-    } else return res.json();
+    } 
   }
 
   //---Загрузка информации о пользователе с сервера

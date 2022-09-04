@@ -14,22 +14,26 @@ function SavedMovies(props) {
 
   //---Ищем в сохранённых фильмах
   function handleSubmit(searchInput) {
-    setSearchQuerySavedMovies(searchInput);
-    if (props.savedMovies.length > 0) {
-      if (!isShortMovies) {
-        setUserSearchSavedMovies(
-          searchByRequest(props.savedMovies, searchInput)
-        );
-      } else {
-        setUserSearchSavedMovies(
-          shortMovies(searchByRequest(props.savedMovies, searchInput))
-        );
-      }
+    const moviesByRequest = searchByRequest(props.savedMovies, searchInput);
+    const userShortMovies = shortMovies(moviesByRequest);
+    if (isShortMovies) {
+      getSearchResult(userShortMovies);
     } else {
-      setSearchMessage(NOT_FOUND);
-      setMoviesNotFound(true);
+      getSearchResult(moviesByRequest);
     }
   }
+
+    //---Получаем результат поиска
+    function getSearchResult(result) {
+      if (result.length === 0) {
+        setSearchMessage(NOT_FOUND);
+        setMoviesNotFound(true);
+      } else {
+        setSearchMessage("");
+        setMoviesNotFound(false);
+        setUserSearchSavedMovies(result);
+      }
+    }
 
   useEffect(() => {
     handleSubmit(searchQuerySavedMovies);

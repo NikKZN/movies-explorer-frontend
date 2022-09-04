@@ -18,9 +18,16 @@ function SearchForm(props) {
     e.preventDefault();
     if (inputValue) {
       props.handleSubmit(inputValue);
+      clearInput();
       setSearchError("");
     } else {
       setSearchError(MISSING_INPUT);
+    }
+  }
+
+  function clearInput() {
+    if (location === "/saved-movies") {
+      setInputValue('');
     }
   }
 
