@@ -5,6 +5,10 @@
   justify-content: space-between;
 }
 
+.header__container_registered {
+  background: #ffffff;
+}
+
 .header__logo {
   height: 38px;
   width: 38px;
@@ -12,10 +16,16 @@
 }
 
 .header__link-films {
+  font-weight: 400;
   font-size: 14px;
   line-height: 18px;
   text-decoration: none;
   margin-right: 22px;
+  color: #000000;
+}
+
+.header__link-films_active {
+  font-weight: 500;
 }
 
 .header__link-films-saved {
@@ -24,6 +34,11 @@
   font-weight: 400;
   text-decoration: none;
   margin-right: 50px;
+  color: #000000;
+}
+
+.header__link-films-saved_active {
+  font-weight: 500;
 }
 
 .header__account {
@@ -32,6 +47,7 @@
 }
 
 .header__profile {
+  font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   display: flex;
@@ -40,6 +56,11 @@
   justify-content: space-between;
   width: 100px;
   margin-right: 70px;
+  color: #000000;
+}
+
+.header__profile_active {
+  font-weight: 500;
 }
 
 .header__profile-background {
@@ -69,6 +90,7 @@
   line-height: 16px;
   text-decoration: none;
   margin-right: 30px;
+  color: #ffffff;
 }
 
 .header__login {
@@ -83,6 +105,7 @@
   justify-content: center;
   align-items: center;
   margin-right: 70px;
+  color: #000000;
 }
 
 .header__logo,

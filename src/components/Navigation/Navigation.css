@@ -4,17 +4,22 @@
 
 @media screen and (max-width: 770px) {
   .header__menu {
-    /* display: flex; */
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     width: 520px;
+    height: 100vh;
     background-color: white;
-    min-height: 100vh;
     position: absolute;
     right: 0;
-    top: 0;
+    top: -100vh;
     z-index: 5;
+    transition: top 0.3s;
+  }
+
+  .header__menu_active {
+    top: 0;
   }
 
   .menu__nav {
@@ -46,7 +51,6 @@
 
   .menu__link-films {
     margin-top: 28px;
-    border-bottom: 2px solid;
   }
 
   .menu__link-films-saved {
@@ -56,7 +60,7 @@
   .menu__link-main-page:hover,
   .menu__link-films:hover,
   .menu__link-films-saved:hover {
-    opacity: .7;
+    opacity: 0.7;
   }
 
   .menu__profile {
@@ -74,7 +78,14 @@
   }
 
   .menu__profile:hover {
-    opacity: .7;
+    opacity: 0.7;
+  }
+
+  .menu__link-main-page_active,
+  .menu__link-films_active,
+  .menu__link-films-saved_active,
+  .menu__profile_active {
+    border-bottom: 2px solid #000000;
   }
 
   .menu__profile-background {

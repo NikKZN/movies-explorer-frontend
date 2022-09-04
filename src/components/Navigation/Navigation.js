@@ -1,31 +1,48 @@
 import "./Navigation.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import profileIcon from "../../images/Header/profile-icon.svg";
 import close from "../../images/Navigation/close.svg";
 
-function Navigation() {
+function Navigation(props) {
+  const location = useLocation().pathname;
+
   return (
-    <nav className="menu header__menu">
-      <img className="menu__close" src={close} alt="Иконка аккаунта." />
+    <nav
+      className={`menu header__menu ${
+        props.isBurgerOpen ? "header__menu_active" : ""
+      }`}
+    >
+      <img
+        className="menu__close"
+        src={close}
+        alt="Иконка закрыть."
+        onClick={props.closeBurgerMenu}
+      />
       <div className="menu__nav">
         <Link
           to="/"
-          // onClick={props.handleSignOut}
-          className="menu__link-main-page"
+          className={`menu__link-main-page ${
+            location === "/" ? "menu__link-main-page_active" : ""
+          }`}
+          onClick={props.closeBurgerMenu}
         >
           Главная
         </Link>
         <Link
           to="/movies"
-          // onClick={props.handleSignOut}
-          className="menu__link-films"
+          className={`menu__link-films ${
+            location === "/movies" ? "menu__link-films_active" : ""
+          }`}
+          onClick={props.closeBurgerMenu}
         >
           Фильмы
         </Link>
         <Link
           to="/saved-movies"
-          // onClick={props.handleSignOut}
-          className="menu__link-films-saved"
+          className={`menu__link-films-saved ${
+            location === "/saved-movies" ? "menu__link-films-saved_active" : ""
+          }`}
+          onClick={props.closeBurgerMenu}
         >
           Сохранённые фильмы
         </Link>
@@ -33,8 +50,10 @@ function Navigation() {
 
       <Link
         to="/profile"
-        // onClick={props.handleSignOut}
-        className="menu__profile"
+        className={`menu__profile ${
+          location === "/profile" ? "menu__profile_active" : ""
+        }`}
+        onClick={props.closeBurgerMenu}
       >
         Аккаунт
         <>
