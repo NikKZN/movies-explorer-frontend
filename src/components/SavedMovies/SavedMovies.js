@@ -33,6 +33,7 @@ function SavedMovies(props) {
         setMoviesNotFound(false);
         setUserSearchSavedMovies(result);
       }
+      setSearchQuerySavedMovies('');
     }
 
   useEffect(() => {
