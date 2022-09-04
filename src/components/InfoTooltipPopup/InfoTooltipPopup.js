@@ -22,7 +22,6 @@ function InfoToolTip(props) {
         />
         <h2 className="popup__title">
           {props.message}
-          {/* {props.isRegistered ? "Всё хорошо!" : `${props.errorMessage}`} */}
         </h2>
       </div>
     </section>

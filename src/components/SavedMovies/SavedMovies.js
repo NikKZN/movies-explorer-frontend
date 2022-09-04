@@ -23,23 +23,23 @@ function SavedMovies(props) {
     }
   }
 
-    //---Получаем результат поиска
-    function getSearchResult(result) {
-      if (result.length === 0) {
-        setSearchMessage(NOT_FOUND);
-        setMoviesNotFound(true);
-      } else {
-        setSearchMessage("");
-        setMoviesNotFound(false);
-        setUserSearchSavedMovies(result);
-      }
-      setSearchQuerySavedMovies('');
+  //---Получаем результат поиска
+  function getSearchResult(result) {
+    if (result.length === 0) {
+      setSearchMessage(NOT_FOUND);
+      setMoviesNotFound(true);
+    } else {
+      setSearchMessage("");
+      setMoviesNotFound(false);
+      setUserSearchSavedMovies(result);
     }
+    setSearchQuerySavedMovies("");
+  }
 
   useEffect(() => {
     handleSubmit(searchQuerySavedMovies);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.onDeleteClick, searchQuerySavedMovies]);
+  }, [props.onDeleteClick, searchQuerySavedMovies, isShortMovies]);
 
   return (
     <>

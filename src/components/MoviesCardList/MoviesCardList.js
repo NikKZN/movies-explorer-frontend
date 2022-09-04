@@ -44,35 +44,31 @@ function MoviesCardList(props) {
       setIsShowNumberMovies(MOVIES_IN_ROW_MOBILE);
       setIsNumberAddMovies(ADD_MOVIES_MOBILE);
     }
-    if (location === "/movies") {
-      showButtonAdd();
-    }
   }
 
   // ---Отслеживаем изменение ширины экрана
   useEffect(() => {
-    if (location === "/movies") {
-      showButtonAdd();
-    }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  //---Показать кнопку Ещё
-  function showButtonAdd() {
-    if (newShowMovies.length === props.searchMovies.length) {
-      setIsShowMore(false);
-    } else {
-      setIsShowMore(true);
-    }
-  }
-
   // ---Добавить ещё фильмы
   function addMoreMovies() {
     setIsShowNumberMovies((e) => e + isNumberAddMovies);
-    showButtonAdd();
   }
+
+  useEffect(() => {
+    if (
+      location === "/movies" &&
+      newShowMovies.length < props.searchMovies.length
+    ) {
+      setIsShowMore(true);
+    } else {
+      setIsShowMore(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.searchMovies, newShowMovies.length]);
 
   return (
     <>
