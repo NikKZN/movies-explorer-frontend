@@ -58,6 +58,11 @@ function MoviesCardList(props) {
     setIsShowNumberMovies((e) => e + isNumberAddMovies);
   }
 
+  // ---Сбрасываем число отображаемых фильмов про новом поиске
+  useEffect(() => {
+    handleResize();
+  }, [props.searchMovies]);
+
   useEffect(() => {
     if (
       location === "/movies" &&
