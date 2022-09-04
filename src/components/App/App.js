@@ -87,7 +87,7 @@ function App() {
         if (res._id) {
           setCurrentUser(res);
           setLoggedIn(true);
-          history.push("/movies");
+          history.push(location === "/saved-movies" ? "/saved-movies" : "/movies");
         } else {
           setLoggedIn(false);
           history.push("/signin");
@@ -241,11 +241,11 @@ function App() {
               isErrMessage={isErrMessage}
             />
           </Route>
-          <Route path="*">
-            <NotFound />
-          </Route>
           <Route>
             {loggedIn ? <Redirect to="/" /> : <Redirect to="signin" />}
+          </Route>
+          <Route path="*">
+            <NotFound />
           </Route>
         </Switch>
         <Route exact path={footerPath}>
