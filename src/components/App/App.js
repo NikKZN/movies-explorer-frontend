@@ -5,7 +5,7 @@ import {
   Redirect,
   Switch,
   useHistory,
-  useLocation
+  useLocation,
 } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Header from "../Header/Header";
@@ -28,7 +28,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isInfoToolTip, setIsInfoToolTip] = useState({
     isOpen: false,
-    status: true,
     message: "",
   }); //-Информационный попап
   const [loggedIn, setLoggedIn] = useState(false);
@@ -42,7 +41,6 @@ function App() {
   function informError(err) {
     setIsInfoToolTip({
       isOpen: true,
-      status: false,
       message: err.message,
     });
   }
@@ -87,10 +85,12 @@ function App() {
         if (res._id) {
           setCurrentUser(res);
           setLoggedIn(true);
-          history.push(location === "/saved-movies" ? "/saved-movies" : "/movies");
+          history.push(
+            location === "/saved-movies" ? "/saved-movies" : "/movies"
+          );
         } else {
           setLoggedIn(false);
-          history.push("/signin");
+          history.push("/");
         }
       })
       .catch((err) => informError(err));
@@ -104,7 +104,6 @@ function App() {
         setCurrentUser(newUser);
         setIsInfoToolTip({
           isOpen: true,
-          status: true,
           message: PROFILE_EDIT_TRUE,
         });
       })
@@ -176,7 +175,6 @@ function App() {
   function closeInfoTooltipPopup() {
     setIsInfoToolTip({
       isOpen: false,
-      status: false,
       message: "",
     });
   }
@@ -188,9 +186,8 @@ function App() {
     }
   }
 
-
   useEffect(() => {
-      getSavedMovies();
+    getSavedMovies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, loggedIn, location]);
 
@@ -201,11 +198,7 @@ function App() {
           <Header loggedIn={loggedIn} />
         </Route>
         <Switch>
-          <Route 
-            exact path="/" 
-            component={Main} 
-            loggedIn={loggedIn} 
-          />
+          <Route exact path="/" component={Main} loggedIn={loggedIn} />
           <ProtectedRoute
             path="/movies"
             component={Movies}
@@ -239,9 +232,6 @@ function App() {
               isErrMessage={isErrMessage}
             />
           </Route>
-          <Route>
-            {loggedIn ? <Redirect to="/" /> : <Redirect to="signin" />}
-          </Route>
           <Route path="*">
             <NotFound />
           </Route>
@@ -251,7 +241,6 @@ function App() {
         </Route>
         <InfoTooltipPopup
           isOpen={isInfoToolTip.isOpen}
-          status={isInfoToolTip.status}
           onClose={closeInfoTooltipPopup}
           onCloseOverlay={closePopupOnOverlay}
           message={isInfoToolTip.message}
