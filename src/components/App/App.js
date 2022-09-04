@@ -190,9 +190,7 @@ function App() {
 
 
   useEffect(() => {
-    if (loggedIn && currentUser && location === "/saved-movies") {
       getSavedMovies();
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, loggedIn, location]);
 
