@@ -1,12 +1,11 @@
 import "./Header.css";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import logo from "../../images/Header/header-logo.svg";
 import profileIcon from "../../images/Header/profile-icon.svg";
 import Navigation from "../Navigation/Navigation";
 
 function Header(props) {
-  const location = useLocation().pathname;
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
 
   function openBurgerMenu() {
@@ -29,29 +28,24 @@ function Header(props) {
       <div className="header__account">
         {props.loggedIn ? (
           <>
-            <Link
+            <NavLink
               to="/movies"
-              className={`header__link-films ${
-                location === "/movies" ? "header__link-films_active" : ""
-              }`}
+              className="header__link-films"
+              activeClassName="header__link-films_active"
             >
               Фильмы
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/saved-movies"
-              className={`header__link-films-saved ${
-                location === "/saved-movies"
-                  ? "header__link-films-saved_active"
-                  : ""
-              }`}
+              className="header__link-films-saved"
+              activeClassName="header__link-films-saved_active"
             >
               Сохранённые фильмы
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/profile"
-              className={`header__profile ${
-                location === "/profile" ? "header__profile_active" : ""
-              }`}
+              className="header__profile"
+              activeClassName="header__profile_active"
             >
               Аккаунт
               <>
@@ -63,7 +57,7 @@ function Header(props) {
                   />
                 </div>
               </>
-            </Link>
+            </NavLink>
             <button
               type="button"
               className="header__burger"

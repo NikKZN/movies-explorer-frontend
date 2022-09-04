@@ -3,14 +3,28 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import More from "../More/More";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import {
+  DESKTOP,
+  TABLET,
+  MOVIES_IN_ROW_DESKTOP,
+  MOVIES_IN_ROW_TABLET,
+  MOVIES_IN_ROW_MOBILE,
+  ADD_MOVIES_DESKTOP,
+  ADD_MOVIES_TABLET,
+  ADD_MOVIES_MOBILE,
+} from "../../utils/constants";
 
 function MoviesCardList(props) {
   const location = useLocation().pathname;
   const [isShowNumberMovies, setIsShowNumberMovies] = useState(
-    window.innerWidth >= 1280 ? 12 : window.innerWidth >= 767 ? 8 : 5
+    window.innerWidth >= DESKTOP
+      ? MOVIES_IN_ROW_DESKTOP
+      : window.innerWidth >= TABLET
+      ? MOVIES_IN_ROW_TABLET
+      : MOVIES_IN_ROW_MOBILE
   ); //-Показывает число фильмов от ширины экрана
   const [isNumberAddMovies, setIsNumberAddMovies] = useState(
-    window.innerWidth >= 767 ? 3 : 2
+    window.innerWidth >= TABLET ? ADD_MOVIES_DESKTOP : ADD_MOVIES_TABLET
   ); //-Добавляет необходимое число фильмов
   const [isShowMore, setIsShowMore] = useState(false); //-Показать кнопку "Ещё"
   const newShowMovies =
@@ -20,15 +34,15 @@ function MoviesCardList(props) {
 
   //---Отображаемое и добавляемое колличество фильмов от ширины дисплея
   function handleResize() {
-    if (window.innerWidth >= 1280) {
-      setIsShowNumberMovies(12);
-      setIsNumberAddMovies(3);
-    } else if (window.innerWidth >= 767) {
-      setIsShowNumberMovies(8);
-      setIsNumberAddMovies(2);
+    if (window.innerWidth >= DESKTOP) {
+      setIsShowNumberMovies(MOVIES_IN_ROW_DESKTOP);
+      setIsNumberAddMovies(ADD_MOVIES_DESKTOP);
+    } else if (window.innerWidth >= TABLET) {
+      setIsShowNumberMovies(MOVIES_IN_ROW_TABLET);
+      setIsNumberAddMovies(ADD_MOVIES_TABLET);
     } else {
-      setIsShowNumberMovies(5);
-      setIsNumberAddMovies(2);
+      setIsShowNumberMovies(MOVIES_IN_ROW_MOBILE);
+      setIsNumberAddMovies(ADD_MOVIES_MOBILE);
     }
     if (location === "/movies") {
       showButtonAdd();

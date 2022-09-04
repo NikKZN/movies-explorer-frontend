@@ -5,6 +5,7 @@ import {
   Redirect,
   Switch,
   useHistory,
+  useLocation
 } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Header from "../Header/Header";
@@ -23,6 +24,7 @@ import { MOVIE_BASE_URL, PROFILE_EDIT_TRUE } from "../../utils/constants";
 
 function App() {
   const history = useHistory();
+  const location = useLocation().pathname;
   const [currentUser, setCurrentUser] = useState({});
   const [isInfoToolTip, setIsInfoToolTip] = useState({
     isOpen: false,
@@ -186,14 +188,13 @@ function App() {
     }
   }
 
-  // useEffect(() => {}, []);
 
   useEffect(() => {
-    if (loggedIn && currentUser) {
+    if (loggedIn && currentUser && location === "/saved-movies") {
       getSavedMovies();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser, loggedIn]);
+  }, [currentUser, loggedIn, location]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -202,7 +203,11 @@ function App() {
           <Header loggedIn={loggedIn} />
         </Route>
         <Switch>
-          <Route exact path="/" component={Main} loggedIn={loggedIn} />
+          <Route 
+            exact path="/" 
+            component={Main} 
+            loggedIn={loggedIn} 
+          />
           <ProtectedRoute
             path="/movies"
             component={Movies}
@@ -236,11 +241,11 @@ function App() {
               isErrMessage={isErrMessage}
             />
           </Route>
-          <Route>
-            {loggedIn ? <Redirect to="/" /> : <Redirect to="signin" />}
-          </Route>
           <Route path="*">
             <NotFound />
+          </Route>
+          <Route>
+            {loggedIn ? <Redirect to="/" /> : <Redirect to="signin" />}
           </Route>
         </Switch>
         <Route exact path={footerPath}>
